@@ -1,235 +1,189 @@
 <!DOCTYPE html>
-<!-- Poochenyprojects -->
-
 <html>
-
 <head>
-    <title>idk yet</title>
+    <title>Bubble sort</title>
 
     <style>
-    
-    html, body {
-    margin: 0;
-    padding: 0;
-    overflow: hidden; 
-    height: 100%;     
-    }   
-    .PlayableArea {
-        background-color: aliceblue;
-        position:relative;
-        align-self: center;
-        display: flex;
-        margin: auto;   
-    }
-    .Screen {
-        position:relative;
-        align-self: center;
-        display: flex;
-        margin: auto;   
-    }
-    .Stats {
-        background-color: beige;
+        .Box {
+            width: 30px;
+            height: 20px;
+            display: inline-block;
+            align-self: center;
+            align-items: center;
+            margin: 5px;
+            background-color: antiquewhite;  
+            text-align:center ;
+            font-family: 'S0egoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: black;
+            user-select: none;        
+            -webkit-user-select: none; 
+            -moz-user-select: none;    
+            -ms-user-select: none;  
+        }
+        .BoxContainer {
+            position: relative;
+            align-self: center;
+            position:relative;
+            align-items: center;
+            justify-content: center;
+            min-height: 5vh;
+            display: flex;
+        }
+        .Button {
         position: absolute;
-        display: contents;
-    }
-    .Player {
-        background-color: lightgreen;
-        position: absolute;
-        border-radius: 50%;
-    }
-    .DamagePart {
-        background-color: red;
-        position:relative;
-        border-radius: 50%;
-    }
-    .RewardPart {
-        background-color: yellow;
-        border-radius: 50%;
-        position:relative;
-    }
+        inset: 0;
+        margin: 100px auto 0 auto;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        width: 60px;
+        height: 20px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: green;
+        color: aliceblue;
+        user-select: none;        
+        -webkit-user-select: none; 
+        -moz-user-select: none;    
+        -ms-user-select: none;
+        }
     </style>
 </head>
 
-<body>
+<body> 
+    <h3 align="center" style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif ;">
+        Bubble Sort
+    </h3>
 
-<div id="Stats"></div>
-<div id="Player"></div>
-<div id="PlayableArea"></div>
-<div id="PositionChecker"></div>
-<div id="ScreenChecker"></div>
+    <div id="BoxContainer"></div>
+    <div id="Button"></div>
 
-<script>
+    <script>
+    const Wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+    const Button = document.getElementById("Button")
+    const AmountofNumbers = 10
+    let FinishedAnimation = false
 
-//Multiple use functions that I use multiple times for convenience\\
+    Button.className = "Button"
+    Button.textContent = "Sort"
 
-function comparePercentages(pct1, pct2) {
-    return parseFloat(pct1) < parseFloat(pct2);
-}
+    let NumberList = [
 
-const Wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+    ];
 
-//Initiate the things needed\\
+    for (let i = 0; i < AmountofNumbers; i++) {
+        NumberList[i] = Math.floor(Math.random() * 100)
+    }
 
-const ScreenChecker = document.getElementById("ScreenChecker")
-ScreenChecker.className = "Screen"
-ScreenChecker.style.height = "100%"
-ScreenChecker.style.width = "100%"
+    const Box = document.getElementById("BoxContainer");
+    Box.className = "BoxContainer"
 
-const PlayableArea = document.getElementById("PlayableArea")
-PlayableArea.className = "PlayableArea"
-PlayableArea.style.height = "100%"
-PlayableArea.style.width = "80%"
+    async function Count(){
+        for (let i = 0; i < AmountofNumbers; i++) {
+        const NewBox = document.createElement("div");
+        NewBox.className = "Box";
+        Box.append(NewBox);
+        NewBox.setAttribute("name", "BoxNumber"+i)
 
-const StatBar = document.getElementById("Stats")
-StatBar.className = "Stats"
-PlayableArea.append(StatBar)
-StatBar.style.left = "10%"
-StatBar.style.height = "10%"
-StatBar.style.width = "10%"
+        for (let k = 0; k <= NumberList[i]; k++) {
+            NewBox.textContent = k
+            await Wait(5)
+        }
+        }
+        FinishedAnimation = true
+        console.log(FinishedAnimation)
+    }
+   
+    Count()
 
-const Player = document.getElementById("Player")
-PlayableArea.append(Player)
-Player.className = "Player"
-Player.style.top = "0%"
-Player.style.left = "0%"
+    let hovering = false
 
-//Variable setup\\
+    async function CompareNumber(Number1, Number2, ListPlace) {
+        Number1.style.backgroundColor = "blue"
+        Number2.style.backgroundColor = "blue"
+        await Wait(300)
+        if (Number(Number1.textContent) > Number(Number2.textContent)) {
+            Number1.textContent = Number2.textContent
+            Number2.textContent = NumberList[ListPlace]
+            NumberList[ListPlace] = Number1.textContent
+            NumberList[ListPlace+1] = Number2.textContent
+        }
+        await Wait(300) 
+        Number1.style.backgroundColor = "antiquewhite"
+        Number2.style.backgroundColor = "antiquewhite"
+        return
+    }
 
-let CurrentTop = 50
-let CurrentLeft = 50
+    async function ButtonActivation() {
+        const BoxContainer = document.getElementById("BoxContainer")
+        let Safe = AmountofNumbers-1
+        let SafetyNet = 1
 
-Player.style.top = CurrentTop + "%"
-Player.style.left = CurrentLeft + "%"
+        if (FinishedAnimation == true) {
+            for (let idk = 0; idk <= AmountofNumbers; idk++) {
+                for (let k = 0; k < AmountofNumbers-SafetyNet; k++) {
 
-let WKey = false
-let SKey = false
-let AKey = false
-let DKey = false
+                    if (AmountofNumbers-SafetyNet == 1) {
+                        const LastContainer = BoxContainer.querySelector(`[name="BoxNumber${0}"]`)
+                        const LastContainer2 = BoxContainer.querySelector(`[name="BoxNumber${1}"]`)
 
-const SetMovementSpeed = 0.5
-let MovementSpeed = SetMovementSpeed
+                        LastContainer.style.backgroundColor="green"
+                        LastContainer2.style.backgroundColor="green"
+                        return
+                    } else {
+                        await CompareNumber(BoxContainer.querySelector(`[name="BoxNumber${k}"]`), BoxContainer.querySelector(`[name="BoxNumber${k+1}"]`), k)
+                        await Wait(300) 
+                    }
 
-//Function for keeping things scaled properly\\
+                }
 
-async function KeepEverythingToScale() {
-    let TopSize = ScreenChecker.offsetHeight
-    let LeftSize = ScreenChecker.offsetLeft
+            const LastContainer = BoxContainer.querySelector(`[name="BoxNumber${Safe}"]`)
+            Safe -= 1
+            SafetyNet += 1
+            LastContainer.style.backgroundColor="green"
+            }
+        }
+    }
 
-    let LastTop = 0
-    let LastLeft = 0
-    while (true) {
-        await Wait(10)
-        TopSize = ScreenChecker.offsetHeight
-        LeftSize = ScreenChecker.offsetWidth
+    function ButtonHover() {
 
-        if (LastTop != TopSize || LastLeft != LeftSize) {
-            
-            if (TopSize > LeftSize) {
-                PlayableArea.style.height = (LeftSize/TopSize)*100 + "%"
-                PlayableArea.style.width = ScreenChecker.style.width + "%"
-            } else if (TopSize < LeftSize) {
-                PlayableArea.style.width = (TopSize/LeftSize)*100 + "%"
-                PlayableArea.style.height = ScreenChecker.style.height + "%"
+        if (FinishedAnimation == false) {
+            if (hovering == false) {
+                Button.addEventListener("mouseleave", ButtonHover)
+                hovering = true
+                return
+            }
+            if (hovering == true) {
+                Button.addEventListener("mouseenter", ButtonHover)
+                hovering = false
+                return
             }
 
-            Player.style.height = PlayableArea.offsetHeight*0.08 + "px"
-            Player.style.width = PlayableArea.offsetHeight*0.08 + "px"
         }
 
-        LastTop = TopSize
-        LastLeft = LeftSize
-    }
-}
+        if (hovering == false) {
+            Button.style.backgroundColor = "greenyellow"
+            Button.style.width = "70px"
+            Button.style.height = "25px"
 
-KeepEverythingToScale()
-
-//Main movement control system\\
-    //Forwards and Backwards (W and S) control the hypotenuse balancing\\
-
-async function MoveDirection(Direction, Amount, type) {
-    if (Direction == "W") {
-        WKey = type
-
-        while (WKey == true) {
-
-            //Check if the player is moving by pythagoras\\
-            if (WKey && (AKey || DKey)) {MovementSpeed = SetMovementSpeed/Math.sqrt(2)} else {MovementSpeed = SetMovementSpeed}
-
-            await Wait(10)
-            if (CurrentTop < 0) {break}
-            CurrentTop -= Number(MovementSpeed)
-            Player.style.top = CurrentTop + "%"
+            Button.addEventListener("mouseleave", ButtonHover)
+            hovering = true
         }
-        MovementSpeed = SetMovementSpeed
+        else {
+            Button.style.backgroundColor = "green"
+            Button.style.width = "60px"
+            Button.style.height = "20px"
 
-    } if (Direction == "S") {
-        SKey = type
-
-        while (SKey == true) {
-            //Check if the player is moving by pythagoras\\
-            if (SKey && (AKey || DKey)) {MovementSpeed = SetMovementSpeed/Math.sqrt(2)} else {MovementSpeed = SetMovementSpeed}
-
-            await Wait(10)
-            if (comparePercentages(Player.style.top, "95%") == false) {break}
-            CurrentTop += Number(MovementSpeed)
-            Player.style.top = CurrentTop + "%"
-        }
-        MovementSpeed = SetMovementSpeed            
-
-    } if (Direction == "A") {
-        AKey = type
-
-        while (AKey == true) {
-            await Wait(10)
-            if (CurrentLeft < 0) {break}
-            CurrentLeft -= Number(MovementSpeed)
-            Player.style.left = CurrentLeft + "%"
-        }
-    } if (Direction == "D") {
-        DKey = type
-
-        while (DKey == true) {
-            await Wait(10)
-            if (comparePercentages(Player.style.left, "95%") == false) {break}
-            CurrentLeft += Number(MovementSpeed)
-            Player.style.left = CurrentLeft + "%"
+            Button.addEventListener("mouseenter", ButtonHover)
+            hovering = false
         }
     }
-}
 
-    //Movement Control: Key down\\
-document.addEventListener("keydown", (event) => {
+    Button.addEventListener("mouseenter", ButtonHover)
+    Button.addEventListener("click", ButtonActivation)
 
-    if (event.key == "w" || event.key == "W" || event.key == "ArrowUp") {
-        if (WKey == true) {return}
-        MoveDirection("W", MovementSpeed, true)
-    } else if (event.key == "s" || event.key == "S" || event.key == "ArrowDown") {
-        if (SKey == true) {return}
-        MoveDirection("S", MovementSpeed, true)
-    } else if (event.key == "a" || event.key == "A" || event.key == "ArrowLeft") {
-        if (AKey == true) {return}
-        MoveDirection("A", MovementSpeed, true)
-    } else if (event.key == "d" || event.key == "D" || event.key == "ArrowRight") {
-        if (DKey == true) {return}
-        MoveDirection("D", MovementSpeed, true)
-    }
-}
-)
-    //Movement Control: Key up\\
-document.addEventListener("keyup", (event) => { 
-
-        if (event.key == "w" || event.key == "W" || event.key == "ArrowUp") {
-            MoveDirection("W", MovementSpeed, false)
-        } else if (event.key == "s" || event.key == "S" || event.key == "ArrowDown") {
-            MoveDirection("S", MovementSpeed, false)
-        } else if (event.key == "a" || event.key == "A" || event.key == "ArrowLeft") {
-            MoveDirection("A", MovementSpeed, false)
-        } else if (event.key == "d" || event.key == "D" || event.key == "ArrowRight") {
-            MoveDirection("D", MovementSpeed, false)
-        }
-}
-)
-</script>
-
+    </script>
 </body>
 </html>
+
