@@ -1,189 +1,267 @@
-<!DOCTYPE html>
 <html>
+<!-- Yuchen Wang: Merivale High School -->
+
 <head>
-    <title>Bubble sort</title>
+    
+    <title>Yuchen's ISU</title>
+    <h3>Yuchen's Individual Study Unit: Measurements</h3>
 
     <style>
-        .Box {
-            width: 30px;
-            height: 20px;
-            display: inline-block;
-            align-self: center;
-            align-items: center;
-            margin: 5px;
-            background-color: antiquewhite;  
-            text-align:center ;
-            font-family: 'S0egoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: black;
-            user-select: none;        
-            -webkit-user-select: none; 
-            -moz-user-select: none;    
-            -ms-user-select: none;  
-        }
-        .BoxContainer {
+        .StyleInputBox1 {
+            background-color: bisque;
             position: relative;
-            align-self: center;
-            position:relative;
-            align-items: center;
-            justify-content: center;
-            min-height: 5vh;
-            display: flex;
+            width: 15%;
+            height: 5%;
+            font-size: 15px; 
+            border-radius: 10px;
+            outline: 0px;
+            box-shadow: 0px 4px 8px rgba(0,0,0, 0.2);
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
         }
-        .Button {
-        position: absolute;
-        inset: 0;
-        margin: 100px auto 0 auto;
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        width: 60px;
-        height: 20px;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background-color: green;
-        color: aliceblue;
-        user-select: none;        
-        -webkit-user-select: none; 
-        -moz-user-select: none;    
-        -ms-user-select: none;
+        .StyleInputBox2 {
+            background-color: bisque;
+            position: relative;
+            width: 5%;
+            height: 5%;
+            font-size: 16px; 
+            border-radius: 10px;
+            outline: 0px;
+            box-shadow: 0px 4px 8px rgba(0,0,0, 0.2);
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+        .StyleDisplay1 {
+            text-shadow: 0px 4px 8px rgba(0,0,0, 0.5);
+            position: relative;
+            width: 15%;
+            height: 2%;
+            font-size: 10px; 
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+        .StyleDisplay2 {
+            text-shadow: 0px 4px 8px rgba(0,0,0, 0.5);
+            position: relative;
+            width: 15%;
+            height: 10%;
+            font-size: 15px; 
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+        .StyleDisplay3 {
+            text-shadow: 0px 4px 8px rgba(0,0,0, 0.5);
+            position: relative;
+            width: 15%;
+            height: 5%;
+            font-size: 15px; 
+            font-family:'Times New Roman', Times, serif;
         }
     </style>
 </head>
 
-<body> 
-    <h3 align="center" style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif ;">
-        Bubble Sort
-    </h3>
 
-    <div id="BoxContainer"></div>
-    <div id="Button"></div>
+<body>
+    <h6><br> Without any AI written code >:(</h6>
+
+    <input type="number" min=0 id="Input1">
+    <select id="UnitInput1">
+        <option value="1">m</option>
+        <option value="1000">km</option>
+        <option value="0.01">cm</option>
+        <option value="0.001">mm</option>
+    </select>
+    <div id="Display1"></div>
+    <div id="DisplayUnit1"></div>
+
+    <input type="number" min=0 id="Input2">
+    <select id="UnitInput2">
+        <option value="1">m</option>
+        <option value="1000">km</option>
+        <option value="0.01">cm</option>
+        <option value="0.001">mm</option>
+    </select>
+    <div id="Display2"></div>
+    <div id="DisplayUnit2"></div>
+
+    <input type="number" min=0 id="Input3">
+        <select id="UnitInput3">
+        <option value="1">m</option>
+        <option value="1000">km</option>
+        <option value="0.01">cm</option>
+        <option value="0.001">mm</option>
+    </select>
+    <div id="Display3"></div>
+    <div id="DisplayUnit3"></div>
+
+    <div id="Display4"></div>
+
+    <select id="UnitInput4">
+    <option value="1">m^3</option>
+    <option value="1000">km^3</option>
+    <option value="0.01">cm^3</option>
+    <option value="0.001">mm^3</option>
+    </select>
+
+    <div id="Display6"></div>
+
+    <div id="Display5"></div>
+
+    <div id="PrismFormulaDisplay"></div>
 
     <script>
-    const Wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-    const Button = document.getElementById("Button")
-    const AmountofNumbers = 10
-    let FinishedAnimation = false
 
-    Button.className = "Button"
-    Button.textContent = "Sort"
+        //My base foundation and thing setting upper\\
+    const Input1 = document.getElementById("Input1")
+    Input1.classList.add("StyleInputBox1")
+    Input1.value = 1
+    const Input2 = document.getElementById("Input2")
+    Input2.classList.add("StyleInputBox1")
+    Input2.value = 1
+    const Input3 = document.getElementById("Input3")
+    Input3.classList.add("StyleInputBox1")
+    Input3.value = 1
 
-    let NumberList = [
+    //Unit Inputs\\
+    const UnitInput1 = document.getElementById("UnitInput1")
+    UnitInput1.classList.add("StyleInputBox2")
+    const UnitInput2 = document.getElementById("UnitInput2")
+    UnitInput2.classList.add("StyleInputBox2")
+    const UnitInput3 = document.getElementById("UnitInput3")
+    UnitInput3.classList.add("StyleInputBox2")
+    const AnswerUnit = document.getElementById("UnitInput4")
+    AnswerUnit.classList.add("StyleInputBox2")
 
-    ];
+    document.getElementById("Display1").classList.add("StyleDisplay1")
+    document.getElementById("Display6").classList.add("StyleDisplay1")
+    document.getElementById("PrismFormulaDisplay").classList.add("StyleDisplay3")
+    document.getElementById("Display2").classList.add("StyleDisplay1")
+    document.getElementById("Display3").classList.add("StyleDisplay1")
+    document.getElementById("DisplayUnit1").classList.add("StyleDisplay1")
+    document.getElementById("DisplayUnit2").classList.add("StyleDisplay1")
+    document.getElementById("DisplayUnit3").classList.add("StyleDisplay1")
 
-    for (let i = 0; i < AmountofNumbers; i++) {
-        NumberList[i] = Math.floor(Math.random() * 100)
+    const PrismVolumeDisplay = document.getElementById("Display4")
+    PrismVolumeDisplay.classList.add("StyleDisplay2")
+    const PyramidVolumeDisplay = document.getElementById("Display5")
+    PyramidVolumeDisplay.classList.add("StyleDisplay2")
+
+    //Text altering is where I decided to be puttings in heres hahaha\\
+    document.getElementById("Display1").textContent = "Length"
+    document.getElementById("Display2").textContent = "Width"
+    document.getElementById("Display3").textContent = "Height"
+    document.getElementById("Display6").textContent = "Answer Unit"
+    PrismVolumeDisplay.textContent = "The volume of the prism will be written here."
+    document.getElementById("PrismFormulaDisplay").textContent = "Volume of a prism is given as Length x Width x Height"
+    PyramidVolumeDisplay.textContent = "The volume of the pyramid will be written here."
+    document.getElementById("DisplayUnit1").textContent = "Unit"
+    document.getElementById("DisplayUnit2").textContent = "Unit"
+    document.getElementById("DisplayUnit3").textContent = "Unit"
+
+    //This is where im moving the stuff theres better way to do this but im lazyyyy\\
+    document.getElementById("PrismFormulaDisplay").style.left = "28%"
+    document.getElementById("PrismFormulaDisplay").style.top = "-24%"
+    AnswerUnit.style.left = "15.25%"
+    AnswerUnit.style.top = "-10%"
+    AnswerUnit.style.width = "8%"
+    document.getElementById("Display6").style.left = "15.25%"
+    document.getElementById("Display6").style.top = "-10%"
+    document.getElementById("DisplayUnit1").style.left = "15.5%"
+    document.getElementById("DisplayUnit1").style.top = "-2%"
+    document.getElementById("DisplayUnit2").style.left = "15.5%"
+    document.getElementById("DisplayUnit2").style.top = "-2%"
+    document.getElementById("DisplayUnit3").style.left = "15.5%"
+    document.getElementById("DisplayUnit3").style.top = "-2%"
+
+    //Useful variables and tables\\
+
+    let NumberList = {
+        [1]: 1,
+        [2]: 1,
+        [3]: 1
     }
 
-    const Box = document.getElementById("BoxContainer");
-    Box.className = "BoxContainer"
+    let AnswerInUnit = 1
 
-    async function Count(){
-        for (let i = 0; i < AmountofNumbers; i++) {
-        const NewBox = document.createElement("div");
-        NewBox.className = "Box";
-        Box.append(NewBox);
-        NewBox.setAttribute("name", "BoxNumber"+i)
+    //Functions for input boxes\\
+    function PerformMath() {
+        const Int1 = NumberList[1]
+        const Int2 = NumberList[2] 
+        const Int3 = NumberList[3] 
 
-        for (let k = 0; k <= NumberList[i]; k++) {
-            NewBox.textContent = k
-            await Wait(5)
+        if (Int1 < 0 || Int2 < 0 || Int3 < 0) {
+            PrismVolumeDisplay.textContent = "The volume of the prism cannot be calculated."
+            return
         }
-        }
-        FinishedAnimation = true
-        console.log(FinishedAnimation)
-    }
-   
-    Count()
 
-    let hovering = false
-
-    async function CompareNumber(Number1, Number2, ListPlace) {
-        Number1.style.backgroundColor = "blue"
-        Number2.style.backgroundColor = "blue"
-        await Wait(300)
-        if (Number(Number1.textContent) > Number(Number2.textContent)) {
-            Number1.textContent = Number2.textContent
-            Number2.textContent = NumberList[ListPlace]
-            NumberList[ListPlace] = Number1.textContent
-            NumberList[ListPlace+1] = Number2.textContent
-        }
-        await Wait(300) 
-        Number1.style.backgroundColor = "antiquewhite"
-        Number2.style.backgroundColor = "antiquewhite"
-        return
+        let representation = "m^3"
+        if (AnswerInUnit == 1) {representation = "m^3"
+        } else if (AnswerInUnit == 1000) {representation = "km^3"
+        } else if (AnswerInUnit == 0.01) {representation = "cm^3"
+        } else if (AnswerInUnit == 0.001) {representation = "mm^3"}
+        
+        let calculation = ((Int1 * Int2 * Int3) / (AnswerInUnit * AnswerInUnit * AnswerInUnit))
+        
+        PrismVolumeDisplay.textContent = "The volume of the prism is " + Number(calculation.toFixed(3)) + " " + representation
+        PyramidVolumeDisplay.textContent = "The volume of the pyramid is " + Number(calculation.toFixed(3))/3 + " " + representation
     }
 
-    async function ButtonActivation() {
-        const BoxContainer = document.getElementById("BoxContainer")
-        let Safe = AmountofNumbers-1
-        let SafetyNet = 1
-
-        if (FinishedAnimation == true) {
-            for (let idk = 0; idk <= AmountofNumbers; idk++) {
-                for (let k = 0; k < AmountofNumbers-SafetyNet; k++) {
-
-                    if (AmountofNumbers-SafetyNet == 1) {
-                        const LastContainer = BoxContainer.querySelector(`[name="BoxNumber${0}"]`)
-                        const LastContainer2 = BoxContainer.querySelector(`[name="BoxNumber${1}"]`)
-
-                        LastContainer.style.backgroundColor="green"
-                        LastContainer2.style.backgroundColor="green"
-                        return
-                    } else {
-                        await CompareNumber(BoxContainer.querySelector(`[name="BoxNumber${k}"]`), BoxContainer.querySelector(`[name="BoxNumber${k+1}"]`), k)
-                        await Wait(300) 
-                    }
-
-                }
-
-            const LastContainer = BoxContainer.querySelector(`[name="BoxNumber${Safe}"]`)
-            Safe -= 1
-            SafetyNet += 1
-            LastContainer.style.backgroundColor="green"
-            }
+    Input1.addEventListener("input", (event) => {
+        if (event.isTrusted == true) {
+            NumberList[1] = Input1.value  * Number(UnitInput1.value)
+            PerformMath()
         }
     }
+    )
 
-    function ButtonHover() {
-
-        if (FinishedAnimation == false) {
-            if (hovering == false) {
-                Button.addEventListener("mouseleave", ButtonHover)
-                hovering = true
-                return
-            }
-            if (hovering == true) {
-                Button.addEventListener("mouseenter", ButtonHover)
-                hovering = false
-                return
-            }
-
-        }
-
-        if (hovering == false) {
-            Button.style.backgroundColor = "greenyellow"
-            Button.style.width = "70px"
-            Button.style.height = "25px"
-
-            Button.addEventListener("mouseleave", ButtonHover)
-            hovering = true
-        }
-        else {
-            Button.style.backgroundColor = "green"
-            Button.style.width = "60px"
-            Button.style.height = "20px"
-
-            Button.addEventListener("mouseenter", ButtonHover)
-            hovering = false
+    Input2.addEventListener("input", (event) => {
+        if (event.isTrusted == true) {
+            NumberList[2] = Input2.value * Number(UnitInput2.value)
+            PerformMath()
         }
     }
+    )
 
-    Button.addEventListener("mouseenter", ButtonHover)
-    Button.addEventListener("click", ButtonActivation)
+    Input3.addEventListener("input", (event) => {
+        if (event.isTrusted == true) {
+            NumberList[3] = Input3.value * Number(UnitInput3.value)
+            PerformMath()
+        }
+    }
+    )
+
+    //Unit Input\\
+
+    UnitInput1.addEventListener("input", (event) => {
+        if (event.isTrusted == true) {
+            NumberList[1] = Input1.value * Number(UnitInput1.value)
+            PerformMath()
+        }
+    }
+    )
+
+    UnitInput2.addEventListener("input", (event) => {
+        if (event.isTrusted == true) {
+            NumberList[2] = Input2.value * Number(UnitInput2.value)
+            PerformMath()
+        }
+    }
+    )
+
+    UnitInput3.addEventListener("input", (event) => {
+        if (event.isTrusted == true) {
+            NumberList[3] = Input3.value * Number(UnitInput3.value)
+            PerformMath()
+        }
+    }
+    )
+
+    AnswerUnit.addEventListener("input", (event) => {
+        if (event.isTrusted == true) {
+            AnswerInUnit = AnswerUnit.value
+            PerformMath()
+        }
+    }
+    )
 
     </script>
 </body>
-</html>
 
+
+</html>
