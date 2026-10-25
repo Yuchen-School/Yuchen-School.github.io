@@ -1,0 +1,376 @@
+<html>
+<!-- Yuchen Wang: Merivale High School -->
+
+<head>
+    
+    <title>Yuchen's ISU</title>
+    <h3>Yuchen's Individual Study Unit: Measurements</h3>
+
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden; 
+            height: 100%;   
+        }
+        .StyleInputBox1 {
+            background-color: bisque;
+            position: relative;
+            width: 15%;
+            height: 5%;
+            font-size: clamp(0.25rem, 1vw + 0.1rem, 3rem);
+            border-radius: 10px;
+            outline: 0px;
+            box-shadow: 0px 4px 8px rgba(0,0,0, 0.2);
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+        .StyleInputBox2 {
+            background-color: bisque;
+            position: relative;
+            width: 5%;
+            height: 5%;
+            font-size: clamp(0.25rem, 1vw + 0.1rem, 3rem);
+            border-radius: 10px;
+            outline: 0px;
+            box-shadow: 0px 4px 8px rgba(0,0,0, 0.2);
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+        .StyleDisplay1 {
+            text-shadow: 0px 4px 8px rgba(0,0,0, 0.5);
+            position: relative;
+            width: 15%;
+            height: 2%;
+            font-size: clamp(0.25rem, 1vw + 0.1rem, 3rem);
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+        .StyleDisplay2 {
+            text-shadow: 0px 4px 8px rgba(0,0,0, 0.5);
+            position: relative;
+            width: 15%;
+            height: 10%;
+            font-size: clamp(0.25rem, 1.1vw + 0.1rem, 3rem);
+            text-decoration: underline;
+            text-decoration-color:aliceblue;
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+        }
+        .StyleDisplay3 {
+            text-shadow: 0px 4px 8px rgba(0,0,0, 0.5);
+            position: relative;
+            width: 15%;
+            height: 5%;
+            font-size: clamp(0.25rem, 1vw + 0.1rem, 3rem);
+            font-family:'Times New Roman', Times, serif
+        }
+
+        .TestModeButton {
+            border-radius: 10px;
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            position:relative;
+            font-size: clamp(0.25rem, 1.3vw + 0.1rem, 3rem);
+            box-shadow: 0px 4px 8px rgba(0,0,0, 0.2);
+            background-color: greenyellow;
+            text-align: center;
+            color:rgba(0,0,0, 0.5);
+            user-select: none; 
+        }
+
+        .ExitButton {
+            border-radius: 10px;
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            position:relative;
+            font-size: clamp(0.25rem, 1.3vw + 0.1rem, 3rem);
+            box-shadow: 0px 4px 8px rgba(0,0,0, 0.2);
+            text-align: center;
+            background-color:rgb(216, 89, 89);
+            user-select: none; 
+
+        }
+
+        .QuizBackdrop {
+            position: absolute;
+            background-color: rgb(193, 207, 234);
+            transition: transform 2s ease;
+        }
+
+        .QuizActivate {
+        transform: translateY(-95%);
+        }
+
+        .QuizDeActivate {
+            transform: translateY(95%);
+        }
+    </style>
+</head>
+
+
+<body>
+    <h6><br> Without any AI written code >:(</h6>
+
+    <input type="number" min=0 id="Input1">
+    <select id="UnitInput1">
+        <option value="1">m</option>
+        <option value="1000">km</option>
+        <option value="0.01">cm</option>
+        <option value="0.001">mm</option>
+    </select>
+    <div id="Display1"></div>
+    <div id="DisplayUnit1"></div>
+
+    <input type="number" min=0 id="Input2">
+    <select id="UnitInput2">
+        <option value="1">m</option>
+        <option value="1000">km</option>
+        <option value="0.01">cm</option>
+        <option value="0.001">mm</option>
+    </select>
+    <div id="Display2"></div>
+    <div id="DisplayUnit2"></div>
+
+    <input type="number" min=0 id="Input3">
+        <select id="UnitInput3">
+        <option value="1">m</option>
+        <option value="1000">km</option>
+        <option value="0.01">cm</option>
+        <option value="0.001">mm</option>
+    </select>
+    <div id="Display3"></div>
+    <div id="DisplayUnit3"></div>
+
+    <div id="Display4"></div>
+
+    <select id="UnitInput4">
+    <option value="1">m^3</option>
+    <option value="1000">km^3</option>
+    <option value="0.01">cm^3</option>
+    <option value="0.001">mm^3</option>
+    </select>
+
+    <div id="Display6"></div>
+
+    <div id="Display5"></div>
+
+    <div id="PrismFormulaDisplay"></div>
+    <div id="PyramidFormulaDisplay"></div>
+
+    <div id="TestModeButton"></div>
+    <div id="QuizFrame"></div>
+    <div id="ExitButton"></div>
+
+    <script>
+
+        //My base foundation and thing setting upper\\
+    const Input1 = document.getElementById("Input1")
+    Input1.classList.add("StyleInputBox1")
+    Input1.value = 1
+    const Input2 = document.getElementById("Input2")
+    Input2.classList.add("StyleInputBox1")
+    Input2.value = 1
+    const Input3 = document.getElementById("Input3")
+    Input3.classList.add("StyleInputBox1")
+    Input3.value = 1
+
+    //Unit Inputs\\
+    const UnitInput1 = document.getElementById("UnitInput1")
+    UnitInput1.classList.add("StyleInputBox2")
+    const UnitInput2 = document.getElementById("UnitInput2")
+    UnitInput2.classList.add("StyleInputBox2")
+    const UnitInput3 = document.getElementById("UnitInput3")
+    UnitInput3.classList.add("StyleInputBox2")
+    const AnswerUnit = document.getElementById("UnitInput4")
+    AnswerUnit.classList.add("StyleInputBox2")
+
+    document.getElementById("Display1").classList.add("StyleDisplay1")
+    document.getElementById("Display6").classList.add("StyleDisplay1")
+    document.getElementById("PrismFormulaDisplay").classList.add("StyleDisplay3")
+    document.getElementById("PyramidFormulaDisplay").classList.add("StyleDisplay3")
+    document.getElementById("Display2").classList.add("StyleDisplay1")
+    document.getElementById("Display3").classList.add("StyleDisplay1")
+    document.getElementById("DisplayUnit1").classList.add("StyleDisplay1")
+    document.getElementById("DisplayUnit2").classList.add("StyleDisplay1")
+    document.getElementById("DisplayUnit3").classList.add("StyleDisplay1")
+
+    const PrismVolumeDisplay = document.getElementById("Display4")
+    PrismVolumeDisplay.classList.add("StyleDisplay2")
+    const PyramidVolumeDisplay = document.getElementById("Display5")
+    PyramidVolumeDisplay.classList.add("StyleDisplay2")
+
+    //Quiz mode\\
+    const Test = document.getElementById("TestModeButton")
+    Test.classList.add("TestModeButton")
+
+    const QuizFrame = document.getElementById("QuizFrame")
+    QuizFrame.style.height = "100%"
+    QuizFrame.style.width = "100%"
+    QuizFrame.classList.add("QuizBackdrop")
+        
+    const ExitQuiz = document.getElementById("ExitButton")
+    ExitQuiz.classList.add("ExitButton")
+    QuizFrame.append(ExitQuiz)
+
+    //Text altering is where I decided to be puttings in heres hahaha\\
+    document.getElementById("Display1").textContent = "Length"
+    document.getElementById("Display2").textContent = "Width"
+    document.getElementById("Display3").textContent = "Height"
+    document.getElementById("Display6").textContent = "Answer Unit"
+    PrismVolumeDisplay.textContent = "The volume of the prism will be written here."
+    document.getElementById("PrismFormulaDisplay").textContent = "Volume of a prism is given as Length x Width x Height"
+    document.getElementById("PyramidFormulaDisplay").textContent = "Volume of a pyramid is given as (Length x Width x Height)/3"
+    PyramidVolumeDisplay.textContent = "The volume of the pyramid will be written here."
+    document.getElementById("DisplayUnit1").textContent = "Unit"
+    document.getElementById("DisplayUnit2").textContent = "Unit"
+    document.getElementById("DisplayUnit3").textContent = "Unit"
+    Test.textContent = "Test Me!"
+
+    //This is where im moving the stuff theres better way to do this but im lazyyyy\\
+    document.getElementById("PrismFormulaDisplay").style.left = "28%"
+    document.getElementById("PrismFormulaDisplay").style.top = "-26.5%"
+    document.getElementById("PyramidFormulaDisplay").style.left = "28%"
+    document.getElementById("PyramidFormulaDisplay").style.top = "-14.5%"
+    AnswerUnit.style.left = "15.25%"
+    AnswerUnit.style.top = "-10%"
+    AnswerUnit.style.width = "8%"
+    document.getElementById("Display6").style.left = "15.25%"
+    document.getElementById("Display6").style.top = "-10%"
+    document.getElementById("DisplayUnit1").style.left = "15.5%"
+    document.getElementById("DisplayUnit1").style.top = "-2%"
+    document.getElementById("DisplayUnit2").style.left = "15.5%"
+    document.getElementById("DisplayUnit2").style.top = "-2%"
+    document.getElementById("DisplayUnit3").style.left = "15.5%"
+    document.getElementById("DisplayUnit3").style.top = "-2%"
+
+    Test.style.left = "35%"
+    Test.style.width = "30%"
+    Test.style.height = "4.5%"
+    QuizFrame.style.top = "100%"
+    ExitQuiz.textContent = "Exit"
+    ExitQuiz.style.height = "3%"
+    ExitQuiz.style.width = "10%"
+    ExitQuiz.style.top = "2%"
+    ExitQuiz.style.left = "2%"
+
+    //Useful variables and tables\\
+
+    let NumberList = {
+        [1]: 1,
+        [2]: 1,
+        [3]: 1
+    }
+
+    let AnswerInUnit = 1
+
+    //Functions for input boxes\\
+    function PerformMath() {
+        const Int1 = NumberList[1]
+        const Int2 = NumberList[2] 
+        const Int3 = NumberList[3] 
+
+        if (Int1 < 0 || Int2 < 0 || Int3 < 0) {
+            PrismVolumeDisplay.textContent = "The volume of the prism cannot be calculated."
+            return
+        }
+
+        let representation = "m^3"
+        if (AnswerInUnit == 1) {representation = "m^3"
+        } else if (AnswerInUnit == 1000) {representation = "km^3"
+        } else if (AnswerInUnit == 0.01) {representation = "cm^3"
+        } else if (AnswerInUnit == 0.001) {representation = "mm^3"}
+        
+        let calculation = ((Int1 * Int2 * Int3) / (AnswerInUnit * AnswerInUnit * AnswerInUnit))
+        
+        PrismVolumeDisplay.textContent = "The volume of the prism is " + Number(calculation.toFixed(3)) + " " + representation 
+        PyramidVolumeDisplay.textContent = "The volume of the pyramid is " + Number((calculation/3).toFixed(3)) + " " + representation 
+    }
+
+    Input1.addEventListener("input", (event) => {
+        if (event.isTrusted == true) {
+            NumberList[1] = Input1.value  * Number(UnitInput1.value)
+            PerformMath()
+        }
+    }
+    )
+
+    Input2.addEventListener("input", (event) => {
+        if (event.isTrusted == true) {
+            NumberList[2] = Input2.value * Number(UnitInput2.value)
+            PerformMath()
+        }
+    }
+    )
+
+    Input3.addEventListener("input", (event) => {
+        if (event.isTrusted == true) {
+            NumberList[3] = Input3.value * Number(UnitInput3.value)
+            PerformMath()
+        }
+    }
+    )
+
+    //Unit Input\\
+
+    UnitInput1.addEventListener("input", (event) => {
+        if (event.isTrusted == true) {
+            NumberList[1] = Input1.value * Number(UnitInput1.value)
+            PerformMath()
+        }
+    }
+    )
+
+    UnitInput2.addEventListener("input", (event) => {
+        if (event.isTrusted == true) {
+            NumberList[2] = Input2.value * Number(UnitInput2.value)
+            PerformMath()
+        }
+    }
+    )
+
+    UnitInput3.addEventListener("input", (event) => {
+        if (event.isTrusted == true) {
+            NumberList[3] = Input3.value * Number(UnitInput3.value)
+            PerformMath()
+        }
+    }
+    )
+
+    AnswerUnit.addEventListener("input", (event) => {
+        if (event.isTrusted == true) {
+            AnswerInUnit = AnswerUnit.value
+            PerformMath()
+        }
+    }
+    )
+
+    //Quiz me!\\
+    async function WaitForAnimation() {
+        await wait(2500)
+        Debounce = false
+    }
+
+    let Debounce = false
+
+    Test.addEventListener("click", (event) => {
+        if (event.isTrusted == true) {
+            Test.style.backgroundColor = "green"
+            QuizFrame.classList.add("QuizActivate")
+            QuizFrame.classList.remove("QuizDeActivate")
+            Debounce = true
+            WaitForAnimation()
+        }
+    }
+    )
+
+    ExitQuiz.addEventListener("click", (event) => {
+        if (event.isTrusted == true) {
+            Test.style.backgroundColor = "greenyellow"
+            QuizFrame.classList.add("QuizDeActivate")
+            QuizFrame.classList.remove("QuizActivate")
+            Debounce = true
+            WaitForAnimation()
+        }
+    }
+    )
+
+    </script>
+</body>
+
+
+</html>
