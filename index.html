@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html>
+<!-- Yuchen Wang: Merivale High School -->
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Yuchen's ISU</title>
+    <h3>Yuchen's Individual Study Unit: Measurements</h3>
+
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden; 
+            height: 100%;   
+        }
+        .StyleInputBox1 {
+            background-color: bisque;
+            position: relative;
+            width: 15%;
+            height: 5%;
+            font-size: clamp(0.25rem, 1vw + 0.1rem, 3rem);
+            border-radius: 10px;
+            outline: 0px;
+            box-shadow: 0px 4px 8px rgba(0,0,0, 0.2);
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+        .StyleInputBox2 {
+            background-color: bisque;
+            position: relative;
+            width: 5%;
+            height: 5%;
+            font-size: clamp(0.25rem, 1vw + 0.1rem, 3rem);
+            border-radius: 10px;
+            outline: 0px;
+            box-shadow: 0px 4px 8px rgba(0,0,0, 0.2);
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+        .StyleDisplay1 {
+            text-shadow: 0px 4px 8px rgba(0,0,0, 0.5);
+            position: relative;
+            width: 15%;
+            height: 2%;
+            font-size: clamp(0.25rem, 1vw + 0.1rem, 3rem);
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+        .StyleDisplay2 {
+            text-shadow: 0px 4px 8px rgba(0,0,0, 0.5);
+            position: relative;
+            width: 15%;
+            height: 10%;
+            font-size: clamp(0.25rem, 1.1vw + 0.1rem, 3rem);
+            text-decoration: underline;
+            text-decoration-color:aliceblue;
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+        }
+        .StyleDisplay3 {
+            text-shadow: 0px 4px 8px rgba(0,0,0, 0.5);
+            position: relative;
+            width: 15%;
+            height: 5%;
+            font-size: clamp(0.25rem, 1vw + 0.1rem, 3rem);
+            font-family:'Times New Roman', Times, serif
+        }
+
+        .TestModeButton {
+            border-radius: 10px;
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            position:relative;
+            font-size: clamp(0.25rem, 1.3vw + 0.1rem, 3rem);
+            box-shadow: 0px 4px 8px rgba(0,0,0, 0.2);
+            background-color: greenyellow;
+            text-align: center;
+            color:rgba(0,0,0, 0.5);
+            user-select: none; 
+        }
+
+        .ExitButton {
+            border-radius: 10px;
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            position:relative;
+            font-size: clamp(0.25rem, 1.3vw + 0.1rem, 3rem);
+            box-shadow: 0px 4px 8px rgba(0,0,0, 0.2);
+            text-align: center;
+            background-color:rgb(216, 89, 89);
+            user-select: none; 
+
+        }
+
+        .Frame {
+            display: flex;
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            position: absolute;
+            background-color: rgb(193, 207, 234);
+            border-radius: 10px;
+            font-size: clamp(0.25rem, 2vw + 0.1rem, 3rem);
+            transition: transform 1s ease;
+            text-align: center;
+            align-items: center; 
+            justify-content: center; 
+        }
+
+        .ChoiceFrame {
+            display: flex;
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            position: absolute;
+            background-color: rgb(193, 207, 234);
+            box-shadow: 0px 4px 8px rgba(0,0,0, 0.2);
+            border-radius: 10px;
+            transition: transform 1s ease;    
+            height: 15%;
+            width: 42.5%;
+            text-align: center;
+            align-items: center; 
+            justify-content: center; 
+
+        }
+
+        .QuizBackdrop {
+            position: absolute;
+            background-color: rgb(161, 183, 228);
+            transition: transform 2s ease;
+        }
+
+        .QuizActivate {
+        transform: translateY(-100%);
+        }
+
+        .QuizDeActivate {
+            transform: translateY(100%);
+        }
+
+        .Appear1 {
+            transition: transform 1s ease;    
+            transform: translateX(-110%);
+        }
+
+        .Appear2 {
+            transition: transform 1s ease;    
+            transform: translateX(-232.5%);
+        }
+
+        .DISAppear1 {
+            transition: opacity 1s ease;
+            opacity: 0;
+        }
+    </style>
+</head>
+
+
+<body>
+    <h6><br> Without any AI written code >:( <br> Numbers are rounded to the nearest thousandths.</h6>
+
+    <input type="number" min=0 id="Input1">
+    <select id="UnitInput1">
+        <option value="1">m</option>
+        <option value="1000">km</option>
+        <option value="0.01">cm</option>
+        <option value="0.001">mm</option>
+    </select>
+    <div id="Display1"></div>
+    <div id="DisplayUnit1"></div>
+
+    <input type="number" min=0 id="Input2">
+    <select id="UnitInput2">
+        <option value="1">m</option>
+        <option value="1000">km</option>
+        <option value="0.01">cm</option>
+        <option value="0.001">mm</option>
+    </select>
+    <div id="Display2"></div>
+    <div id="DisplayUnit2"></div>
+
+    <input type="number" min=0 id="Input3">
+        <select id="UnitInput3">
+        <option value="1">m</option>
+        <option value="1000">km</option>
+        <option value="0.01">cm</option>
+        <option value="0.001">mm</option>
+    </select>
+    <div id="Display3"></div>
+    <div id="DisplayUnit3"></div>
+
+    <div id="Display4"></div>
+
+    <select id="UnitInput4">
+    <option value="1">m^3</option>
+    <option value="1000">km^3</option>
+    <option value="0.01">cm^3</option>
+    <option value="0.001">mm^3</option>
+    </select>
+
+    <div id="Display6"></div>
+
+    <div id="Display5"></div>
+
+    <div id="PrismFormulaDisplay"></div>
+    <div id="PyramidFormulaDisplay"></div>
+
+    <div id="TestModeButton"></div>
+    <div id="QuizTitle" class="Frame"></div>
+    <div id="QuestionPage" class="Frame"></div>
+    <div id="QuizFrame"></div>
+    <div id="ExitButton"></div>
+
+    <div id="Choice1" class = "ChoiceFrame"></div>
+    <div id="Choice2" class = "ChoiceFrame"></div>
+    <div id="Choice3" class = "ChoiceFrame"></div>
+    <div id="Choice4" class = "ChoiceFrame"></div>
+
+    <script>
+    
+    const Wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+        //My base foundation and thing setting upper\\
+    const Input1 = document.getElementById("Input1")
+    Input1.classList.add("StyleInputBox1")
+    Input1.value = 1
+    const Input2 = document.getElementById("Input2")
+    Input2.classList.add("StyleInputBox1")
+    Input2.value = 1
+    const Input3 = document.getElementById("Input3")
+    Input3.classList.add("StyleInputBox1")
+    Input3.value = 1
+
+    //Unit Inputs\\
+    const UnitInput1 = document.getElementById("UnitInput1")
+    UnitInput1.classList.add("StyleInputBox2")
+    const UnitInput2 = document.getElementById("UnitInput2")
+    UnitInput2.classList.add("StyleInputBox2")
+    const UnitInput3 = document.getElementById("UnitInput3")
+    UnitInput3.classList.add("StyleInputBox2")
+    const AnswerUnit = document.getElementById("UnitInput4")
+    AnswerUnit.classList.add("StyleInputBox2")
+
+    document.getElementById("Display1").classList.add("StyleDisplay1")
+    document.getElementById("Display6").classList.add("StyleDisplay1")
+    document.getElementById("PrismFormulaDisplay").classList.add("StyleDisplay3")
+    document.getElementById("PyramidFormulaDisplay").classList.add("StyleDisplay3")
+    document.getElementById("Display2").classList.add("StyleDisplay1")
+    document.getElementById("Display3").classList.add("StyleDisplay1")
+    document.getElementById("DisplayUnit1").classList.add("StyleDisplay1")
+    document.getElementById("DisplayUnit2").classList.add("StyleDisplay1")
+    document.getElementById("DisplayUnit3").classList.add("StyleDisplay1")
+
+    const PrismVolumeDisplay = document.getElementById("Display4")
+    PrismVolumeDisplay.classList.add("StyleDisplay2")
+    const PyramidVolumeDisplay = document.getElementById("Display5")
+    PyramidVolumeDisplay.classList.add("StyleDisplay2")
+
+    //Quiz mode\\
+    const Test = document.getElementById("TestModeButton")
+    Test.classList.add("TestModeButton")
+
+    const QuizFrame = document.getElementById("QuizFrame")
+    QuizFrame.style.height = "100%"
+    QuizFrame.style.width = "100%"
+    QuizFrame.classList.add("QuizBackdrop")
+        
+    const ExitQuiz = document.getElementById("ExitButton")
+    ExitQuiz.classList.add("ExitButton")
+    QuizFrame.append(ExitQuiz)
+    QuizFrame.append(document.getElementById("QuizTitle"))
+
+    const TopPage = document.getElementById("QuestionPage")
+    QuizFrame.append(TopPage)
+
+    const Choice1 = document.getElementById("Choice1")
+    QuizFrame.append(Choice1)
+    const Choice2 = document.getElementById("Choice2")
+    QuizFrame.append(Choice2)
+    const Choice3 = document.getElementById("Choice3")
+    QuizFrame.append(Choice3)
+    const Choice4 = document.getElementById("Choice4")
+    QuizFrame.append(Choice4)
+
+    //Text altering is where I decided to be puttings in heres hahaha\\
+    document.getElementById("Display1").textContent = "Length"
+    document.getElementById("Display2").textContent = "Width"
+    document.getElementById("Display3").textContent = "Height"
+    document.getElementById("Display6").textContent = "Answer Unit"
+    PrismVolumeDisplay.textContent = "The volume of the prism will be written here."
+    document.getElementById("PrismFormulaDisplay").textContent = "Volume of a prism is given as Length x Width x Height"
+    document.getElementById("PyramidFormulaDisplay").textContent = "Volume of a pyramid is given as (Length x Width x Height)/3"
+    PyramidVolumeDisplay.textContent = "The volume of the pyramid will be written here."
+    document.getElementById("DisplayUnit1").textContent = "Unit"
+    document.getElementById("DisplayUnit2").textContent = "Unit"
+    document.getElementById("DisplayUnit3").textContent = "Unit"
+    Test.textContent = "Test Me!"
+    document.getElementById("QuizTitle").textContent = "Yuchen's Individual Study Unit Quizer"
+
+    //This is where im moving the stuff theres better way to do this but im lazyyyy\\
+    document.getElementById("PrismFormulaDisplay").style.left = "28%"
+    document.getElementById("PrismFormulaDisplay").style.top = "-26.5%"
+    document.getElementById("PyramidFormulaDisplay").style.left = "28%"
+    document.getElementById("PyramidFormulaDisplay").style.top = "-14.5%"
+    AnswerUnit.style.left = "15.25%"
+    AnswerUnit.style.top = "-10%"
+    AnswerUnit.style.width = "8%"
+    document.getElementById("Display6").style.left = "15.25%"
+    document.getElementById("Display6").style.top = "-10%"
+    document.getElementById("DisplayUnit1").style.left = "15.5%"
+    document.getElementById("DisplayUnit1").style.top = "-2%"
+    document.getElementById("DisplayUnit2").style.left = "15.5%"
+    document.getElementById("DisplayUnit2").style.top = "-2%"
+    document.getElementById("DisplayUnit3").style.left = "15.5%"
+    document.getElementById("DisplayUnit3").style.top = "-2%"
+
+    Test.style.left = "35%"
+    Test.style.width = "30%"
+    Test.style.height = "4.5%"
+    QuizFrame.style.top = "100%"
+    ExitQuiz.textContent = "Exit"
+    ExitQuiz.style.height = "3%"
+    ExitQuiz.style.width = "10%"
+    ExitQuiz.style.top = "2%"
+    ExitQuiz.style.left = "2%"
+    document.getElementById("QuizTitle").style.left = "30%"
+    document.getElementById("QuizTitle").style.top = "2%"
+    document.getElementById("QuizTitle").style.fontSize = "clamp(0.25rem, 2.5vw + 0.1rem, 3rem)"
+    document.getElementById("QuizTitle").style.color = "darkblue"
+    document.getElementById("QuizTitle").style.width = "50%"
+    document.getElementById("QuizTitle").style.height = "5%"
+    document.getElementById("QuizTitle").style.backgroundColor = "rgb(161, 183, 228)"
+    TopPage.style.left = "105%"
+    TopPage.style.top = "8%"
+    TopPage.style.width = "90%"
+    TopPage.style.height = "50%"
+    TopPage.style.fontSize = "clamp(0.25rem, 2vw + 0.5rem, 3rem);"
+    Choice1.style.top = "60%"
+    Choice1.style.left = "105%"
+    Choice2.style.left = "152.5%"
+    Choice2.style.top = "60%"
+    Choice3.style.top = "80%"
+    Choice3.style.left = "105%"
+    Choice4.style.left = "152.5%"
+    Choice4.style.top = "80%"
+
+    //Useful variables and tables\\
+
+    let NumberList = {
+        [1]: 1,
+        [2]: 1,
+        [3]: 1
+    }
+
+    let AnswerInUnit = 1
+
+    //Functions for input boxes\\
+    function PerformMath() {
+        const Int1 = NumberList[1]
+        const Int2 = NumberList[2] 
+        const Int3 = NumberList[3] 
+
+        if (Int1 < 0 || Int2 < 0 || Int3 < 0) {
+            PrismVolumeDisplay.textContent = "The volume of the prism cannot be calculated."
+            return
+        }
+
+        let representation = "m^3"
+        if (AnswerInUnit == 1) {representation = "m^3"
+        } else if (AnswerInUnit == 1000) {representation = "km^3"
+        } else if (AnswerInUnit == 0.01) {representation = "cm^3"
+        } else if (AnswerInUnit == 0.001) {representation = "mm^3"}
+        
+        let calculation = ((Int1 * Int2 * Int3) / (AnswerInUnit * AnswerInUnit * AnswerInUnit))
+        
+        PrismVolumeDisplay.textContent = "The volume of the prism is " + Number(calculation.toFixed(3)) + " " + representation 
+        PyramidVolumeDisplay.textContent = "The volume of the pyramid is " + Number((calculation/3).toFixed(3)) + " " + representation 
+    }
+
+    Input1.addEventListener("input", (event) => {
+        if (event.isTrusted == true) {
+            NumberList[1] = Input1.value  * Number(UnitInput1.value)
+            PerformMath()
+        }
+    }
+    )
+
+    Input2.addEventListener("input", (event) => {
+        if (event.isTrusted == true) {
+            NumberList[2] = Input2.value * Number(UnitInput2.value)
+            PerformMath()
+        }
+    }
+    )
+
+    Input3.addEventListener("input", (event) => {
+        if (event.isTrusted == true) {
+            NumberList[3] = Input3.value * Number(UnitInput3.value)
+            PerformMath()
+        }
+    }
+    )
+
+    //Unit Input\\
+
+    UnitInput1.addEventListener("input", (event) => {
+        if (event.isTrusted == true) {
+            NumberList[1] = Input1.value * Number(UnitInput1.value)
+            PerformMath()
+        }
+    }
+    )
+
+    UnitInput2.addEventListener("input", (event) => {
+        if (event.isTrusted == true) {
+            NumberList[2] = Input2.value * Number(UnitInput2.value)
+            PerformMath()
+        }
+    }
+    )
+
+    UnitInput3.addEventListener("input", (event) => {
+        if (event.isTrusted == true) {
+            NumberList[3] = Input3.value * Number(UnitInput3.value)
+            PerformMath()
+        }
+    }
+    )
+
+    AnswerUnit.addEventListener("input", (event) => {
+        if (event.isTrusted == true) {
+            AnswerInUnit = AnswerUnit.value
+            PerformMath()
+        }
+    }
+    )
+
+    let Given1 = 0 //Base Area\\ //Radius\\
+    let Given2 = 0 //Height\\ //Height\\
+    let GivenShape = " "
+    let GivenVolume = 0
+
+    let RealShape = " "
+    let RealGiven2 = 0
+    let RealGiven = 0
+    let RealVolume = 0
+
+const names = [
+  "Ihsan",
+  "Katherine",
+  "Ishwarya",
+  "Katelyn",
+  "Matthew",
+  "Shelly",
+  "Zain",
+  "Vanassa",
+  "Sougoto",
+  "Anika",
+  "Rattan",
+  "Vrujal",
+  "Bella",
+  "Aanya",
+  "Grace",
+  "Katherine",
+  "Oneth",
+  "Luai",
+  "Rita",
+  "Yilin",
+  "Ariel",
+  "Audrey",
+  "Quinn",
+  "Rahaf",
+  "Evey",
+  "Elliot",
+  "Aisha",
+  "Hrithik",
+  "Naval",
+  "Vishva",
+  "Grace",
+  "Aanya",
+  "Shiven",
+  "Maya",
+  "Inas",
+  "Erin",
+  "Zhuo",
+  "Drake",
+  "Mikayla",
+  "Emily",
+  "Noor",
+  "Isaac",
+  "Danica",
+  "Tina",
+  "Xige",
+  "Sophie",
+  "Alicia",
+  "Brendan",
+  "Elena",
+  "Enxi",
+  "Sarah",
+  "Vicky",
+  "Abigail",
+  "Griffin"
+]
+    function GenerateSelection(CorrectAnswer) {
+        Choice1.style.height = "14.999%"
+        Choice2.style.height = "14.999%"        
+        Choice3.style.height = "14.999%"
+        Choice4.style.height = "14.999%"
+        OneinFour = Math.floor(Math.random() * 4)
+        WrongOneChange = Math.abs(CorrectAnswer + Math.floor(Math.random() * RealGiven1) + 10)
+        WrongOneChange2 = Math.abs(CorrectAnswer - Math.floor(Math.random() * RealGiven1) - 10)
+        WrongOneChange3 = Math.abs(CorrectAnswer + Math.floor(Math.random() * RealGiven1))
+
+        if (RealShape == CorrectAnswer) {
+            let shapelist = ["Prism", "Cone", "Cylinder", "Pyramid"]
+            shapelist = shapelist.filter(shape => shape !== CorrectAnswer);
+            WrongOneChange = shapelist[0]
+            WrongOneChange2 = shapelist[1]
+            WrongOneChange3 = shapelist[2]
+        }
+        if (OneinFour == 1) {
+            Choice1.style.height = "15%"
+            Choice1.addEventListener("click", (event) => {Click(Choice1,)})
+            Choice2.addEventListener("click", (event) => {Click(Choice2)})
+            Choice3.addEventListener("click", (event) => {Click(Choice3)})
+            Choice4.addEventListener("click", (event) => {Click(Choice4)})
+
+            Choice1.textContent = CorrectAnswer
+            Choice2.textContent = WrongOneChange
+            Choice3.textContent = WrongOneChange2
+            Choice4.textContent = WrongOneChange3
+        } else if (OneinFour == 2) {
+            Choice2.style.height = "15%"
+            Choice1.addEventListener("click", (event) => {Click(Choice1)})
+            Choice2.addEventListener("click", (event) => {Click(Choice2)})
+            Choice3.addEventListener("click", (event) => {Click(Choice3)})
+            Choice4.addEventListener("click", (event) => {Click(Choice4)})
+
+            Choice1.textContent = WrongOneChange
+            Choice2.textContent = CorrectAnswer
+            Choice3.textContent = WrongOneChange2
+            Choice4.textContent = WrongOneChange3
+        } else if (OneinFour == 3) {
+            Choice3.style.height = "15%"
+            Choice1.addEventListener("click", (event) => {Click(Choice1)})
+            Choice2.addEventListener("click", (event) => {Click(Choice2)})
+            Choice3.addEventListener("click", (event) => {Click(Choice3)})
+            Choice4.addEventListener("click", (event) => {Click(Choice4)})
+
+            Choice1.textContent = WrongOneChange
+            Choice2.textContent = WrongOneChange2
+            Choice3.textContent = CorrectAnswer
+            Choice4.textContent = WrongOneChange3
+        } else {
+            Choice4.style.height = "15%"
+            Choice1.addEventListener("click", (event) => {Click(Choice1)})
+            Choice2.addEventListener("click", (event) => {Click(Choice2)})
+            Choice3.addEventListener("click", (event) => {Click(Choice3)})
+            Choice4.addEventListener("click", (event) => {Click(Choice4)})
+
+            Choice1.textContent = WrongOneChange
+            Choice2.textContent = WrongOneChange2
+            Choice3.textContent = WrongOneChange3
+            Choice4.textContent = CorrectAnswer
+        }
+
+    }
+
+    function GenerateText() {
+        TopPage.textContent = "The base area of a " + Shape + " is " + Given1 + " units squared. The height is " + Given2 + " units. " + names[Math.floor(Math.random() * names.length)] + " measures the object to have " + Volume + " units squared of volume. What is [x]."
+        
+        if (Given1 == "[x]") {
+            GenerateSelection(RealGiven)
+        } else if (Given2 == "[x]") {
+            GenerateSelection(RealGiven2)
+        } else if (Volume == "[x]") {
+            GenerateSelection(RealVolume)
+        } else {
+            GenerateSelection(RealShape)
+        }
+    }
+
+    function GenerateVolume(WhatShape) {
+        if (WhatShape == "Prism") {
+            return Given1 * Given2
+        } else if (WhatShape == "Pyramid") {
+            return (Given1 * Give)
+        }
+    }
+
+    //Quiz me!\\
+    async function WaitForAnimation() {
+        TopPage.classList.remove("Appear1")
+        await Wait(100)
+        Choice1.classList.remove("Appear2")
+        await Wait(100)
+        Choice2.classList.remove("Appear2")
+        await Wait(100)
+        Choice3.classList.remove("Appear2")
+        await Wait(100)
+        Choice4.classList.remove("Appear2")
+        await Wait(100)
+        Debounce = false
+    }
+
+    async function RunQuiz() {
+        RealGiven1 = Math.floor(Math.random() * 200)
+        RealGiven2 = Math.floor(Math.random() * 200)
+
+        let Randomize = Math.floor(Math.random() * 4)
+        if (Randomize == 1) {
+            RealShape = "Prism"
+            RealVolume = RealGiven1 * RealGiven2
+        } else if (Randomize == 2) {
+            RealShape = "Pyramid"
+            RealVolume = (RealGiven1 * RealGiven2)/3
+        } else if (Randomize == 3) {
+            RealShape = "Cylinder"
+            RealVolume = ((RealGiven1)*(RealGiven1) * (Math.PI) * RealGiven2)
+            RealVolume = Number(RealVolume.toFixed(3))
+        } else {
+            RealShape = "Cone"
+            RealVolume = ((RealGiven1)*(RealGiven1) * (Math.PI) * RealGiven2/3)
+            RealVolume = Number(RealVolume.toFixed(3))
+        }
+
+        Randomize = Math.floor(Math.random() * 4)
+        if (Randomize == 1) {
+            Given1 = "[x]"
+            Given2 = RealGiven2
+            Volume = RealVolume
+            Shape = RealShape
+        } else if (Randomize == 2) {
+            Given1 = RealGiven1
+            Given2 = "[x]"
+            Volume = RealVolume
+            Shape = RealShape
+        } else if (Randomize == 3) {
+            Given1 = RealGiven1
+            Given2 = RealGiven2
+            Volume = "[x]"
+            Shape = RealShape
+        } else {
+            Given1 = RealGiven1
+            Given2 = RealGiven2
+            Volume = RealVolume
+            Shape = "[x]"
+        }
+
+        GenerateText()
+
+        await Wait(2000)
+        TopPage.classList.add("Appear1")
+        await Wait(100)
+        Choice1.classList.add("Appear2")
+        await Wait(100)
+        Choice2.classList.add("Appear2")
+        await Wait(100)
+        Choice3.classList.add("Appear2")
+        await Wait(100)
+        Choice4.classList.add("Appear2")
+    }
+
+    async function SolveQuestion() {
+
+        TopPage.classList.add("DISAppear1")
+        Choice1.classList.add("DISAppear1")
+        Choice2.classList.add("DISAppear1")
+        Choice3.classList.add("DISAppear1")
+        Choice4.classList.add("DISAppear1")
+        await Wait(1000)
+        TopPage.classList.remove("Appear1")
+        Choice1.classList.remove("Appear2")
+        Choice2.classList.remove("Appear2")
+        Choice3.classList.remove("Appear2")
+        Choice4.classList.remove("Appear2")
+        await Wait(1000)
+        TopPage.classList.remove("DISAppear1")
+        Choice1.classList.remove("DISAppear1")
+        Choice2.classList.remove("DISAppear1")
+        Choice3.classList.remove("DISAppear1")
+        Choice4.classList.remove("DISAppear1")
+        RunQuiz()
+    }
+
+    let Debounce = false
+
+    Test.addEventListener("click", (event) => {
+        if (event.isTrusted == true) {
+            Test.style.backgroundColor = "rgb(100, 130, 100)"
+            ExitQuiz.style.backgroundColor = "rgb(216, 89, 89)"
+            QuizFrame.classList.add("QuizActivate")
+            QuizFrame.classList.remove("QuizDeActivate")
+            Debounce = true
+
+            Choice1.addEventListener("mouseenter", (event) => {Hover(true, Choice1)})
+            Choice2.addEventListener("mouseenter", (event) => {Hover(true, Choice2)})
+            Choice3.addEventListener("mouseenter", (event) => {Hover(true, Choice3)})
+            Choice4.addEventListener("mouseenter", (event) => {Hover(true, Choice4)})
+
+            Choice1.addEventListener("mouseleave", (event) => {Hover(false, Choice1)})
+            Choice2.addEventListener("mouseleave", (event) => {Hover(false, Choice2)})
+            Choice3.addEventListener("mouseleave", (event) => {Hover(false, Choice3)})
+            Choice4.addEventListener("mouseleave", (event) => {Hover(false, Choice4)})
+
+            RunQuiz()
+            WaitForAnimation()
+        }
+    }
+    )
+
+    ExitQuiz.addEventListener("click", (event) => {
+        if (event.isTrusted == true) {
+            Test.style.backgroundColor = "greenyellow"
+            ExitQuiz.style.backgroundColor = "rgb(150, 50, 50)"
+            QuizFrame.classList.add("QuizDeActivate")
+            QuizFrame.classList.remove("QuizActivate")
+
+            Choice1.style.backgroundColor = "rgb(193, 207, 234)"
+            Choice2.style.backgroundColor = "rgb(193, 207, 234)"
+            Choice3.style.backgroundColor = "rgb(193, 207, 234)"
+            Choice4.style.backgroundColor = "rgb(193, 207, 234)"
+
+
+            Debounce = true
+            WaitForAnimation()
+        }
+    }
+    )
+
+    //Hover functions\\
+
+    Test.addEventListener("mouseenter", (event) => {
+        Test.style.backgroundColor = "rgb(120, 180, 120)"
+    }
+    )
+
+    Test.addEventListener("mouseleave", (event) => {
+        Test.style.backgroundColor = "greenyellow"
+    }
+    )
+
+    ExitQuiz.addEventListener("mouseenter", (event) => {
+        ExitQuiz.style.backgroundColor = "rgb(200, 120, 120)"
+    }
+    )
+
+    ExitQuiz.addEventListener("mouseleave", (event) => {
+        ExitQuiz.style.backgroundColor = "rgb(216, 89, 89)"
+    }
+    )
+
+    function Hover(onoroff, thing) {
+        if (onoroff == true) {
+            thing.style.backgroundColor = "rgb(160, 175, 200)"
+        } else {
+            thing.style.backgroundColor = "rgb(193, 207, 234)"
+        }
+    }
+
+    function Click(thing) {
+        if (thing.style.height == "15%") {
+            thing.style.backgroundColor = "rgb(100, 180, 100)"
+            thing.textContent = "CORRECT!"
+            SolveQuestion()
+        } else {
+            thing.style.backgroundColor = "rgb(180, 100, 100)"
+            thing.textContent = "INCORRECT!"
+        }
+    }
+
+    </script>
+</body>
+
+
+</html>
