@@ -561,7 +561,11 @@ const names = [
     }
 
     function GenerateText() {
-        TopPage.textContent = "The base area of a " + Shape + " is " + Given1 + " units squared. The height is " + Given2 + " units. " + names[Math.floor(Math.random() * names.length)] + " measures the object to have " + Volume + " units cubed of volume. What is [x]."
+        if (RealVolume == "Prism" || RealVolume == "Pyramid") {
+            TopPage.textContent = "The base area of a " + Shape + " is " + Given1 + " units squared. The height is " + Given2 + " units. " + names[Math.floor(Math.random() * names.length)] + " measures the object to have " + Volume + " units cubed of volume. What is [x]."
+        } else {
+            TopPage.textContent = "The radius of the base of a " + Shape + " is " + Given1 + " units. The height is " + Given2 + " units. " + names[Math.floor(Math.random() * names.length)] + " measures the object to have " + Volume + " units cubed of volume. What is [x]."
+        }
         
         if (Given1 == "[x]") {
             GenerateSelection(RealGiven1)
