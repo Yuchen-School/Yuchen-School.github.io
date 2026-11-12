@@ -436,7 +436,7 @@
 
     let RealShape = " "
     let RealGiven2 = 0
-    let RealGiven = 0
+    let RealGiven1 = 0
     let RealVolume = 0
 
 const names = [
@@ -564,7 +564,7 @@ const names = [
         TopPage.textContent = "The base area of a " + Shape + " is " + Given1 + " units squared. The height is " + Given2 + " units. " + names[Math.floor(Math.random() * names.length)] + " measures the object to have " + Volume + " units cubed of volume. What is [x]."
         
         if (Given1 == "[x]") {
-            GenerateSelection(RealGiven)
+            GenerateSelection(RealGiven1)
         } else if (Given2 == "[x]") {
             GenerateSelection(RealGiven2)
         } else if (Volume == "[x]") {
